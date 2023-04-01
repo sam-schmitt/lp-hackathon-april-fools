@@ -1,18 +1,24 @@
+// Import the necessary modules and components
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Button, ButtonGroup, Heading, Text } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
+
+// Define the font subset for Inter
 const inter = Inter({ subsets: ["latin"] });
 
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
-
+// Define a functional component for a card that displays a plant's information
 function MyCard(props) {
+	// Import the router from Next.js
 	const router = useRouter();
+
+	// Handle clicks on the card by navigating to the plant page
 	const handleCardClick = (e) => {
 		console.log("Card clicked");
 		router.push("/plant");
 	};
+
+	// Handle clicks on the "Water Plant" button by sending a PUT request to the server
 	const handleButtonClick = (plantId) => {
 		const requestOptions = {
 			method: "PUT",
@@ -22,6 +28,7 @@ function MyCard(props) {
 			.then((data) => {});
 	};
 
+	// Render the card with the plant's information and "Water Plant" button
 	return (
 		<Card margin={10} onClick={handleCardClick}>
 			<CardHeader>
@@ -46,18 +53,24 @@ function MyCard(props) {
 	);
 }
 
+// Define the main component for the homepage
 export default function Home() {
+	// Set up state for the list of plants
 	const [plants, setPlants] = useState([]);
+
+	// Fetch the list of plants from the server
 	async function getPlants() {
 		fetch("http://localhost:4000/plant")
 			.then((response) => response.json())
 			.then((data) => setPlants(data));
 	}
 
+	// Use the useEffect hook to fetch the plant data when the component mounts
 	useEffect(() => {
 		getPlants();
 	}, []);
 
+	// Render the page with the plant information cards
 	return (
 		<>
 			<Head>

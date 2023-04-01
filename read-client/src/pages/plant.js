@@ -1,16 +1,25 @@
+// Import the necessary modules and components
 import Head from "next/head";
 import { Inter } from "next/font/google";
 import { Button, ButtonGroup, Heading, Text } from "@chakra-ui/react";
 import { Card, CardHeader, CardBody, CardFooter } from "@chakra-ui/react";
 import { useRouter } from "next/router";
+
+// Define the font subset for Inter
 const inter = Inter({ subsets: ["latin"] });
 
+// Define the component for the plant page
 export default function PlantPage() {
+	// Import the router from Next.js
 	const router = useRouter();
+
+	// Handle clicks on the "Go Back" button by navigating to the homepage
 	const handleClick = (e) => {
 		e.preventDefault();
 		router.push("/");
 	};
+
+	// Render the page with a heading and "Go Back" button
 	return (
 		<>
 			<Head>
